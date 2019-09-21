@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
 const GET_USER = gql` 
-  query ($email: String) {
+  query User($email: String) {
     user(email: $email) {
       email
       name
