@@ -1,4 +1,4 @@
-const { connectDb } = require('../models');
+const mongoose = require('mongoose');
 
 class Database {
   constructor(props) {
@@ -15,13 +15,21 @@ class Database {
     }
   }
 
+  connectDb() {
+    return mongoose.connect(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+  }
+
   async connect() {
     return new Promise(async (resolve, reject) => {
       if (this.isConnected) {
         resolve()
       } else {
         try {
-          await connectDb();
+          await this.connectDb();
           this.isConnected = true;
           resolve();
         } catch (error) {
