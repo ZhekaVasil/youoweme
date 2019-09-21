@@ -4,9 +4,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const database = require('./controllers/Database');
+const { ApolloServer } = require('apollo-server-express');
+const typeDefs = require('./graphql/schemas');
+const resolvers = require('./graphql/resolvers');
 
-const apiRouter = require('./routes/api');
+database.connect().catch(error => console.log(error));
 
+const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
 
 // view engine setup
@@ -21,8 +25,10 @@ app.use(cookieParser());
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+server.applyMiddleware({ app });
+
 // API router
-app.use('/api', database.connectMiddleware.bind(database), apiRouter);
+// app.use('/api', database.connectMiddleware.bind(database), apiRouter);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

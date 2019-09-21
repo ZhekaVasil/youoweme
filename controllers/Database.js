@@ -15,6 +15,15 @@ class Database {
     }
   }
 
+  async request(request) {
+    try {
+      await this.connect();
+      return request();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   connectDb() {
     return mongoose.connect(process.env.DATABASE_URL, {
       useNewUrlParser: true,
