@@ -1,0 +1,8 @@
+{
+  "signal": "SIGHUP",
+  "exec": "node ./bin/www",
+  "events": {
+    "restart": "kill-port 9000",
+    "crash": "kill-port 9000"
+  }
+}

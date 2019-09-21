@@ -12,9 +12,11 @@ class App extends React.Component {
     try {
       const data = await axios.get('/api/users');
       console.log(data);
-      this.setState({
-        data: data.data.test
-      })
+      if (!data.data.error) {
+        this.setState({
+          data: data.data.email
+        })
+      }
     } catch (error) {
       console.error(error)
     }

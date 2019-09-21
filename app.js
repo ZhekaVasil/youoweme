@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const database = require('./controllers/Database');
 
 const apiRouter = require('./routes/api');
 
@@ -21,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // API router
-app.use('/api', apiRouter);
+app.use('/api', database.connectMiddleware.bind(database), apiRouter);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
