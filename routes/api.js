@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
-  const data = {test: true};
+  const data = {test: 'true'};
   // Return json
   res.json(data);
 });
