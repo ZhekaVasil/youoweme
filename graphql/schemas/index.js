@@ -1,5 +1,5 @@
+const Root = require('./root');
 const User = require('./User');
+const Debt = require('./Debt');
 
-const schemas = User;
-
-module.exports = schemas;
+module.exports = [Root, User, Debt];
