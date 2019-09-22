@@ -8,8 +8,6 @@ const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./graphql/schemas');
 const resolvers = require('./graphql/resolvers');
 
-database.connect().catch(error => console.log(error));
-
 const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
 
@@ -24,6 +22,8 @@ app.use(cookieParser());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.use('/graphql', database.connectMiddleware.bind(database));
 
 server.applyMiddleware({ app });
 
