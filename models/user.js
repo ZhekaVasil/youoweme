@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-
 userSchema.statics.getAllUsers = function(filter) {
   return this.find(filter);
 };

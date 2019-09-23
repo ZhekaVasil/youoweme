@@ -9,6 +9,7 @@ const User = gql`
     surname: String
     phone: String
     isAdmin: Boolean
+    oweToDebts: [Debt]
   }
   
   input UserInput {

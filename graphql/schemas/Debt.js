@@ -4,8 +4,8 @@ const {gql} = require('apollo-server-express');
 const Debt = gql`
   type Debt {
     _id: ID!
-    owner: String!
-    oweTo: String!
+    owner: User!
+    oweTo: User!
     amount: Float!
   }
   
